@@ -1982,6 +1982,7 @@ __metadata:
     react: 17.0.2
     react-native: 0.68.4
     react-native-cli: ^2.0.1
+    react-native-pager-view: ^6.3.3
     react-test-renderer: 17.0.2
   languageName: unknown
   linkType: soft
@@ -8243,6 +8244,16 @@ __metadata:
   version: 0.0.6
   resolution: "react-native-gradle-plugin@npm:0.0.6"
   checksum: 185ad348931ef4f58065b50bbf80558af668b1ef11c31067aab7f1cd85b18809a62fcf0b7a18444726dacd098042771a570c0ac76bb8976c3ccbe7c86cff0e11
+  languageName: node
+  linkType: hard
+
+"react-native-pager-view@npm:^6.3.3":
+  version: 6.3.3
+  resolution: "react-native-pager-view@npm:6.3.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: b4f6ef33a7de34c254aa0cfdcdb7231c256e5d2b5c5d16f16a7c54379829bae7ec1d86e7daf23ef89dbac6088cf36e9678c3009a20e4ba786498848c86113399
   languageName: node
   linkType: hard
 
