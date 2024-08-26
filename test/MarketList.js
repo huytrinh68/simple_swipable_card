@@ -168,14 +168,15 @@ const MarketList = () => {
         //     [0, -236],
         //     Extrapolation.CLAMP,
         // )
-        const transformY = сurrentScrollValue.value > 100 ? withTiming(-(headerHeight + HEADER_TAB), { duration: 500 }) : withTiming(0, { duration: 500 })
+        console.log('сurrentScrollValue.value', сurrentScrollValue.value)
+        const transformY = сurrentScrollValue.value > 100 ? withTiming(-(headerHeight + HEADER_TAB), { duration: 300 }) : withTiming(0, { duration: 300 })
         return {
             transform: [{ translateY: transformY }],
         };
     });
 
     return (
-        <Animated.View style={[{ height, backgroundColor: '#FFF' }, viewAnimatedStyle]} onLayout={handleTabLayout}>
+        <Animated.View style={[{ height: height * 1.1, backgroundColor: '#cecece' }, viewAnimatedStyle]} onLayout={handleTabLayout}>
             <ScrollableTabView
                 style={{ marginTop: 20 }}
                 initialPage={0}

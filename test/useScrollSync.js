@@ -9,7 +9,6 @@ const useScrollSync = (
 
         const { heightCollapsed, heightExpanded } = headerConfig;
         const headerDiff = heightExpanded - heightCollapsed;
-
         for (const { list, position } of scrollPairs) {
             const scrollPosition = position.value ?? 0;
 
