@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {Animated, Easing, StyleSheet} from 'react-native';
-import {useAnimatedValue} from './useAnimatedValue';
+import {Animated, StyleSheet} from 'react-native';
 
 const cumulativeSum = arr => {
   const result = [];
@@ -41,45 +40,13 @@ export function TabBarIndicator({
   layout,
   navigationState,
   position,
-  width,
-  gap,
   style,
 }) {
-  const isIndicatorShown = React.useRef(false);
-  const isWidthDynamic = width === 'auto';
-
-  const opacity = useAnimatedValue(isWidthDynamic ? 0 : 1);
-
-  const indicatorVisible = isWidthDynamic
-    ? layout.width &&
-      navigationState.routes
-        .slice(0, navigationState.index)
-        .every((_, r) => getTabWidth(r))
-    : true;
-
-  React.useEffect(() => {
-    const fadeInIndicator = () => {
-      if (!isIndicatorShown.current && isWidthDynamic && indicatorVisible) {
-        isIndicatorShown.current = true;
-
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 150,
-          easing: Easing.in(Easing.linear),
-          useNativeDriver: true,
-        }).start();
-      }
-    };
-
-    fadeInIndicator();
-
-    return () => opacity.stopAnimation();
-  }, [indicatorVisible, isWidthDynamic, opacity]);
-
   const {routes} = navigationState;
 
   const transform = [];
   const inputRange = routes.map((_, i) => i);
+
   const outputRange = inputRange.reduce(
     (result, _current, index) => {
       const tabWidth = getTabWidth(index);
@@ -101,30 +68,21 @@ export function TabBarIndicator({
     transform.push({translateX});
   }
 
-  if (width === 'auto') {
-    transform.push(
-      {
-        scaleX:
-          routes.length > 1
-            ? position.interpolate({
-                inputRange,
-                outputRange: outputRange.indicator,
-                extrapolate: 'clamp',
-              })
-            : outputRange[0],
-      },
-      {translateX: 0.5},
-    );
-  }
+  transform.push(
+    {
+      scaleX:
+        routes.length > 1
+          ? position.interpolate({
+              inputRange,
+              outputRange: outputRange.indicator,
+              extrapolate: 'clamp',
+            })
+          : outputRange[0],
+    },
+    {translateX: 0.5},
+  );
   return (
-    <Animated.View
-      style={[
-        styles.indicator,
-        {width: width === 'auto' ? 1 : width},
-        {transform},
-        style,
-      ]}
-    />
+    <Animated.View style={[styles.indicator, {width: 1}, {transform}, style]} />
   );
 }
 
